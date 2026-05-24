@@ -1,0 +1,81 @@
+@import "tailwindcss" source(none);
+@source "../components";
+@source "../layouts";
+@source "../pages";
+@source "../styles";
+
+:root {
+  --color-page: #f8f4ec;
+  --color-surface: #f3ede1;
+  --color-surface-strong: #e4f3ee;
+  --color-accent: #319f7a;
+  --color-accent-deep: #1f6e56;
+  --color-ink: #1e2a26;
+  --color-body: #4e5d57;
+  --color-muted: #7b7a6f;
+  --color-border: rgba(49, 159, 122, 0.14);
+  --color-border-strong: rgba(49, 159, 122, 0.28);
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at top, rgba(49, 159, 122, 0.1), transparent 26%),
+    var(--color-page);
+  color: var(--color-ink);
+}
+
+.nav-active {
+  @apply after:content-[""] after:absolute after:-bottom-1.5 after:left-1/2 after:h-1.5 after:w-1.5 after:-translate-x-1/2 after:rounded-full hover:after:bg-transparent;
+}
+
+.nav-active::after {
+  background-color: var(--color-accent);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #1f6e56, #319f7a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+::selection {
+  background: rgba(49, 159, 122, 0.28);
+}

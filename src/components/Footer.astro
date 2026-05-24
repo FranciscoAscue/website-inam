@@ -1,0 +1,154 @@
+---
+import { NAVIGATION, SOCIAL_LINKS, SITE } from '@config/site';
+import { Facebook, Linkedin, Mail, MapPin, Twitter } from 'lucide-react';
+import { INAM_CONTACT } from '@utils/inam-data';
+import { withBase } from '@utils/paths';
+---
+
+<footer class="bg-[var(--color-accent-deep)] text-slate-200">
+  <div class="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-4">
+      <!-- Company Info -->
+      <div class="lg:col-span-1 space-y-6">
+        <a href={withBase('/')} class="group block">
+          <img
+            src={withBase('/LOGO INAM FINAL.png')}
+            alt="INAM - Instituto de Investigación en Ingeniería Ambiental"
+            class="h-16 w-auto rounded-xl bg-white px-3 py-2 transition-transform group-hover:scale-[1.02]"
+          />
+        </a>
+        <p class="max-w-xs text-sm leading-relaxed text-slate-200/85">
+          {SITE.description}
+        </p>
+        <div class="flex space-x-4">
+          <a
+            href={SOCIAL_LINKS.linkedin}
+            class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-slate-200 transition-all hover:bg-white/20 hover:text-white"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a
+            href={SOCIAL_LINKS.twitter}
+            class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-slate-200 transition-all hover:bg-white/20 hover:text-white"
+            aria-label="Twitter"
+          >
+            <Twitter className="w-5 h-5" />
+          </a>
+          <a
+            href={SOCIAL_LINKS.facebook}
+            class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-slate-200 transition-all hover:bg-white/20 hover:text-white"
+            aria-label="Facebook"
+          >
+            <Facebook className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-6">
+          Navegación
+        </h3>
+        <ul class="space-y-3">
+          {NAVIGATION.map((item) => (
+            <li>
+              <a
+                href={withBase(item.href)}
+                class="inline-flex items-center text-sm text-slate-200/90 transition-colors hover:text-white group"
+              >
+                <span class="mr-0 h-0.5 w-0 bg-[#b7d0a3] transition-all group-hover:mr-2 group-hover:w-2"></span>
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-6">
+          Recursos del Instituto
+        </h3>
+        <ul class="space-y-3">
+          <li>
+            <a href={withBase('/centros-investigacion')} class="inline-flex items-center text-sm text-slate-200/90 transition-colors hover:text-white group">
+              <span class="mr-0 h-0.5 w-0 bg-[#b7d0a3] transition-all group-hover:mr-2 group-hover:w-2"></span>
+              Infraestructura y territorio
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/grupos-investigacion')} class="inline-flex items-center text-sm text-slate-200/90 transition-colors hover:text-white group">
+              <span class="mr-0 h-0.5 w-0 bg-[#b7d0a3] transition-all group-hover:mr-2 group-hover:w-2"></span>
+              Grupos de investigación
+            </a>
+          </li>
+          <li>
+            <a href={withBase('/publicaciones')} class="inline-flex items-center text-sm text-slate-200/90 transition-colors hover:text-white group">
+              <span class="mr-0 h-0.5 w-0 bg-[#b7d0a3] transition-all group-hover:mr-2 group-hover:w-2"></span>
+              Producción científica y fondos
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-6">
+          Contacto
+        </h3>
+        <ul class="space-y-3 text-sm">
+          <li>
+            <a href={`mailto:${INAM_CONTACT.email}`} class="inline-flex items-center gap-3 text-slate-200/90 transition-colors hover:text-white">
+              <Mail className="h-4 w-4" />
+              {INAM_CONTACT.email}
+            </a>
+          </li>
+          <li>
+            <span class="inline-flex items-center gap-3 text-slate-200/90">
+              <MapPin className="h-4 w-4" />
+              {INAM_CONTACT.region}
+            </span>
+          </li>
+          <li>
+            <a href={SITE.url} class="inline-flex items-center gap-3 text-slate-200/90 transition-colors hover:text-white">
+              <Linkedin className="h-4 w-4" />
+              Página de referencia UNTRM
+            </a>
+          </li>
+        </ul>
+        
+        <div class="mt-8">
+          <a
+            href={withBase('/#contacto')}
+            class="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--color-accent-deep)] transition-all hover:bg-[#f2f5ef]"
+          >
+            Ir al contacto
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-16 border-t border-white/15 pt-8">
+      <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+        <p class="text-sm text-slate-200/80">
+          &copy; {new Date().getFullYear()} {SITE.author}. Propuesta de interfaz institucional.
+        </p>
+        <div class="flex items-center space-x-6 text-sm">
+          <a href={withBase('/centros-investigacion')} class="text-slate-200/85 transition-colors hover:text-white">
+            Infraestructura
+          </a>
+          <span class="text-white/35">•</span>
+          <a href={withBase('/grupos-investigacion')} class="text-slate-200/85 transition-colors hover:text-white">
+            Grupos
+          </a>
+          <span class="text-white/35">•</span>
+          <a href={withBase('/publicaciones')} class="text-slate-200/85 transition-colors hover:text-white">
+            Producción
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

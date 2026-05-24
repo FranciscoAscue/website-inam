@@ -4,6 +4,18 @@
 # Keep this file so the ignore rules can be tracked.
 !.gitignore
 
+# Keep template source visible for Tailwind class detection during local builds.
+!src/
+src/*
+!src/components/
+!src/components/**
+!src/layouts/
+!src/layouts/**
+!src/pages/
+!src/pages/**
+!src/styles/
+!src/styles/**
+
 # Keep the GitHub Pages workflow.
 !.github/
 !.github/workflows/

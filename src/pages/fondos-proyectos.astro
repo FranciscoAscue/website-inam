@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BadgeDollarSign, BriefcaseBusiness, FolderKanban, Landmark } from 'lucide-react';
+import {
+  INAM_COMPETITIVE_FUNDS,
+  INAM_PUBLIC_INVESTMENT_PROJECTS,
+  INAM_REFERENCE_IMAGES,
+  INAM_SOURCE,
+} from '@utils/inam-data';
+---
+
+<BaseLayout
+  title="Fondos y Proyectos | INAM"
+  description="Fondos concursables y proyectos de inversión pública visibles en la fuente oficial consultada para el INAM de la UNTRM."
+>
+  <section class="relative overflow-hidden bg-[var(--color-accent-deep)] text-white">
+    <div class="absolute inset-0">
+      <img src={INAM_REFERENCE_IMAGES.projects} alt="Proyectos en la referencia oficial del INAM" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,44,40,0.93),rgba(16,44,40,0.77),rgba(16,44,40,0.42))]"></div>
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div class="max-w-4xl space-y-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-white/60">Fondos y Proyectos</p>
+        <h1 class="font-[var(--font-display)] text-5xl leading-tight sm:text-6xl">
+          Cartera visible de financiamiento competitivo e inversión pública vinculada al instituto.
+        </h1>
+        <p class="max-w-2xl text-lg leading-8 text-white/78">
+          La referencia oficial consultada publica un bloque de fondos concursables y otro de proyectos de inversión pública. Aquí se reorganizan para facilitar lectura y navegación.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-3xl border border-white/15 bg-white/8 p-5 backdrop-blur">
+          <p class="font-[var(--font-display)] text-4xl">{INAM_COMPETITIVE_FUNDS.length}</p>
+          <p class="mt-2 text-sm text-white/70">fondos concursables visibles</p>
+        </div>
+        <div class="rounded-3xl border border-white/15 bg-white/8 p-5 backdrop-blur">
+          <p class="font-[var(--font-display)] text-4xl">{INAM_PUBLIC_INVESTMENT_PROJECTS.length}</p>
+          <p class="mt-2 text-sm text-white/70">proyectos de inversión pública</p>
+        </div>
+        <div class="rounded-3xl border border-white/15 bg-white/8 p-5 backdrop-blur">
+          <p class="font-[var(--font-display)] text-4xl">2026</p>
+          <p class="mt-2 text-sm text-white/70">consulta del feed oficial reordenada para esta propuesta</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <div class="flex max-w-3xl flex-col gap-4">
+      <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">Fondos Concursables</p>
+      <h2 class="font-[var(--font-display)] text-4xl leading-tight text-[var(--color-ink)] sm:text-5xl">
+        Proyectos competitivos visibles en el bloque oficial del instituto
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {INAM_COMPETITIVE_FUNDS.map((fund) => (
+        <article class="rounded-[2rem] border border-[var(--color-border)] bg-white p-8 shadow-sm">
+          <div class="flex items-start justify-between gap-4">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-surface-strong)] text-[var(--color-accent)]">
+              <BadgeDollarSign className="h-6 w-6" />
+            </div>
+            <span class="rounded-full bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+              {fund.funding}
+            </span>
+          </div>
+          <h3 class="mt-6 font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)]">{fund.code}</h3>
+          <p class="mt-5 text-base leading-8 text-[var(--color-body)]">{fund.summary}</p>
+          <p class="mt-5 text-sm leading-7 text-[var(--color-body)]">
+            <strong>Responsable técnico:</strong> {fund.lead}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <div class="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+      <div class="flex max-w-3xl flex-col gap-4">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">Proyectos de Inversión Pública</p>
+        <h2 class="font-[var(--font-display)] text-4xl leading-tight text-[var(--color-ink)]">
+          Infraestructura, servicios y fortalecimiento científico institucional
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        {INAM_PUBLIC_INVESTMENT_PROJECTS.map((project) => (
+          <article class="rounded-[2rem] border border-[var(--color-border)] bg-white p-8 shadow-sm">
+            <div class="flex items-start justify-between gap-4">
+              <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-surface-strong)] text-[var(--color-accent)]">
+                <Landmark className="h-6 w-6" />
+              </div>
+              <span class="rounded-full bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+                CUI {project.cui}
+              </span>
+            </div>
+            <h3 class="mt-6 font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)]">{project.code}</h3>
+            <p class="mt-5 text-base leading-8 text-[var(--color-body)]">{project.summary}</p>
+            <p class="mt-5 text-sm leading-7 text-[var(--color-body)]">
+              <strong>Coordinación visible:</strong> {project.coordinator}
+            </p>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-10 grid gap-4 lg:grid-cols-2">
+        <div class="flex items-start gap-4 rounded-2xl border border-[var(--color-border)] bg-white/80 p-5">
+          <FolderKanban className="mt-1 h-5 w-5 shrink-0 text-[var(--color-accent)]" />
+          <p class="text-sm leading-7 text-[var(--color-body)]">
+            La página oficial muestra ambos bloques con textos introductorios de relleno, pero sí conserva una colección útil de iniciativas con responsables y códigos de inversión.
+          </p>
+        </div>
+        <div class="flex items-start gap-4 rounded-2xl border border-[var(--color-border)] bg-white/80 p-5">
+          <BriefcaseBusiness className="mt-1 h-5 w-5 shrink-0 text-[var(--color-accent)]" />
+          <p class="text-sm leading-7 text-[var(--color-body)]">
+            Fuente consultada: <a href={INAM_SOURCE.officialPage} target="_blank" rel="noopener noreferrer" class="font-semibold text-[var(--color-accent)]">página oficial del INAM</a> y su <a href={INAM_SOURCE.dataFeed} target="_blank" rel="noopener noreferrer" class="font-semibold text-[var(--color-accent)]">feed estructurado</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

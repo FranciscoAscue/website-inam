@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ArrowUpRight, BadgeDollarSign, BookOpen, FileText, Landmark } from 'lucide-react';
+import {
+  INAM_COMPETITIVE_FUNDS,
+  INAM_PUBLICATIONS,
+  INAM_PUBLIC_INVESTMENT_PROJECTS,
+  INAM_REFERENCE_IMAGES,
+  INAM_SOURCE,
+} from '@utils/inam-data';
+---
+
+<BaseLayout
+  title="Producción Científica y Fondos | INAM"
+  description="Publicaciones científicas, fondos concursables y proyectos de inversión pública visibles en la fuente oficial consultada para el INAM de la UNTRM."
+>
+  <section class="relative overflow-hidden bg-[var(--color-accent-deep)] text-white">
+    <div class="absolute inset-0">
+      <img src={INAM_REFERENCE_IMAGES.projects} alt="Imagen de proyectos de investigación en la referencia oficial del INAM" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,44,40,0.92),rgba(16,44,40,0.76),rgba(16,44,40,0.45))]"></div>
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div class="max-w-4xl space-y-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-white/60">Producción Científica y Fondos</p>
+        <h1 class="font-[var(--font-display)] text-5xl leading-tight sm:text-6xl">
+          Publicaciones, financiamiento competitivo y proyectos que sostienen la agenda científica del instituto.
+        </h1>
+        <p class="max-w-2xl text-lg leading-8 text-white/78">
+          Esta página reúne en un solo recorrido tres bloques que en la referencia oficial aparecen por separado: publicaciones científicas, fondos concursables y proyectos de inversión pública.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-3xl border border-white/15 bg-white/8 p-5 backdrop-blur">
+          <p class="font-[var(--font-display)] text-4xl">{INAM_PUBLICATIONS.length}</p>
+          <p class="mt-2 text-sm text-white/70">publicaciones destacadas</p>
+        </div>
+        <div class="rounded-3xl border border-white/15 bg-white/8 p-5 backdrop-blur">
+          <p class="font-[var(--font-display)] text-4xl">{INAM_COMPETITIVE_FUNDS.length}</p>
+          <p class="mt-2 text-sm text-white/70">fondos concursables visibles</p>
+        </div>
+        <div class="rounded-3xl border border-white/15 bg-white/8 p-5 backdrop-blur">
+          <p class="font-[var(--font-display)] text-4xl">{INAM_PUBLIC_INVESTMENT_PROJECTS.length}</p>
+          <p class="mt-2 text-sm text-white/70">proyectos de inversión pública</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <div class="flex max-w-3xl flex-col gap-4">
+      <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">Publicaciones Científicas</p>
+      <h2 class="font-[var(--font-display)] text-4xl leading-tight text-[var(--color-ink)] sm:text-5xl">
+        Evidencia publicada y visible en la colección oficial consultada
+      </h2>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      {INAM_PUBLICATIONS.map((publication) => (
+        <article class="mt-12 rounded-[2rem] border border-[var(--color-border)] bg-white p-8 shadow-sm first:mt-12">
+          <div class="flex items-start justify-between gap-4">
+            <p class="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface-strong)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">
+              <BookOpen className="h-4 w-4" />
+              {publication.quartile}
+            </p>
+            <span class="text-sm font-semibold text-[var(--color-muted)]">{publication.year}</span>
+          </div>
+
+          <h2 class="mt-6 font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)]">
+            {publication.title}
+          </h2>
+
+          <div class="mt-6 space-y-2 text-base leading-7 text-[var(--color-body)]">
+            <p><strong>Revista:</strong> {publication.journal}</p>
+            <p><strong>Cuartil:</strong> {publication.quartile}</p>
+          </div>
+
+          <a
+            href={publication.doi}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-8 inline-flex items-center gap-2 rounded-full border border-[var(--color-border-strong)] px-5 py-2.5 text-sm font-semibold text-[var(--color-accent)] transition-colors hover:bg-[var(--color-surface)]"
+          >
+            Ver DOI
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <div class="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+      <div class="flex max-w-3xl flex-col gap-4">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">Fondos Concursables</p>
+        <h2 class="font-[var(--font-display)] text-4xl leading-tight text-[var(--color-ink)]">
+          Financiamiento competitivo que acompaña la agenda de investigación
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {INAM_COMPETITIVE_FUNDS.slice(0, 9).map((fund) => (
+          <article class="rounded-[2rem] border border-[var(--color-border)] bg-white p-7 shadow-sm">
+            <div class="flex items-start justify-between gap-4">
+              <div class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-surface-strong)] text-[var(--color-accent)]">
+                <BadgeDollarSign className="h-5 w-5" />
+              </div>
+              <span class="rounded-full bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+                {fund.funding}
+              </span>
+            </div>
+            <h3 class="mt-5 font-[var(--font-display)] text-2xl leading-tight text-[var(--color-ink)]">{fund.code}</h3>
+            <p class="mt-4 text-sm leading-7 text-[var(--color-body)]">{fund.summary}</p>
+            <p class="mt-4 text-sm leading-7 text-[var(--color-body)]">
+              <strong>Responsable técnico:</strong> {fund.lead}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <div class="rounded-[2rem] border border-[var(--color-border)] bg-white p-8 shadow-sm">
+      <div class="flex max-w-3xl flex-col gap-4">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">Inversión Pública</p>
+        <h2 class="font-[var(--font-display)] text-4xl leading-tight text-[var(--color-ink)]">
+          Proyectos institucionales visibles para servicios, laboratorios e infraestructura
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-6 lg:grid-cols-2">
+        {INAM_PUBLIC_INVESTMENT_PROJECTS.map((project) => (
+          <article class="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-7">
+            <div class="flex items-start justify-between gap-4">
+              <div class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-[var(--color-accent)]">
+                <Landmark className="h-5 w-5" />
+              </div>
+              <span class="rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+                CUI {project.cui}
+              </span>
+            </div>
+            <h3 class="mt-5 font-[var(--font-display)] text-2xl leading-tight text-[var(--color-ink)]">{project.code}</h3>
+            <p class="mt-4 text-sm leading-7 text-[var(--color-body)]">{project.summary}</p>
+            <p class="mt-4 text-sm leading-7 text-[var(--color-body)]">
+              <strong>Coordinación visible:</strong> {project.coordinator}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <div class="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+      <div class="flex items-start gap-4">
+        <FileText className="mt-1 h-6 w-6 text-[var(--color-accent)]" />
+        <div class="space-y-3">
+          <h2 class="font-[var(--font-display)] text-3xl text-[var(--color-ink)]">Fuente oficial consultada</h2>
+          <p class="max-w-3xl text-base leading-8 text-[var(--color-body)]">
+            {INAM_SOURCE.note} Para ahorrar navegación, en esta propuesta los bloques de publicaciones, fondos concursables y proyectos de inversión pública se presentan juntos.
+          </p>
+          <a
+            href={INAM_SOURCE.officialPage}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)]"
+          >
+            Ir a la página oficial del INAM
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

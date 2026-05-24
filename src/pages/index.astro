@@ -1,0 +1,438 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  ArrowRight,
+  BookOpen,
+  FlaskConical,
+  Leaf,
+  Microscope,
+  Mountain,
+  Users,
+  Waves,
+} from 'lucide-react';
+import {
+  INAM_COMPETITIVE_FUNDS,
+  INAM_CONTACT,
+  INAM_EXPERIMENTAL_CENTERS,
+  INAM_GROUPS,
+  INAM_LABS,
+  INAM_PUBLICATIONS,
+  INAM_PUBLIC_INVESTMENT_PROJECTS,
+  INAM_REFERENCE_IMAGES,
+  INAM_RESEARCH_CENTERS,
+  INAM_SOURCE,
+} from '@utils/inam-data';
+import { withBase } from '@utils/paths';
+
+const metrics = [
+  { value: String(INAM_RESEARCH_CENTERS.length), label: 'centros de investigación visibles en la fuente oficial consultada.' },
+  { value: String(INAM_EXPERIMENTAL_CENTERS.length), label: 'centros experimentales distribuidos en Amazonas.' },
+  { value: String(INAM_GROUPS.length), label: 'grupos de investigación vinculados al instituto.' },
+  { value: String(INAM_PUBLICATIONS.length), label: 'publicaciones científicas destacadas en la colección oficial.' },
+];
+
+const lines = [
+  {
+    title: 'Calidad ambiental y recursos hídricos',
+    description:
+      'Desarrollamos estudios sobre agua, suelo, aire y ruido ambiental para responder a desafíos locales con base científica y criterio territorial.',
+    icon: Waves,
+  },
+  {
+    title: 'Biodiversidad y conservación',
+    description:
+      'Fortalecemos iniciativas asociadas a conservación de la biodiversidad, valoración de ecosistemas y monitoreo de paisajes estratégicos de Amazonas.',
+    icon: Leaf,
+  },
+  {
+    title: 'Microbiología y biotecnología ambiental',
+    description:
+      'Promovemos investigación experimental y aplicada para bioinsumos, remediación, análisis microbiológico y nuevas soluciones de sostenibilidad.',
+    icon: Microscope,
+  },
+];
+
+const platforms = [
+  {
+    eyebrow: 'Infraestructura',
+    title: 'Centros, laboratorios y territorio experimental',
+    text: 'Agrupa infraestructura científica y despliegue territorial para evitar que centros, labs y estaciones vivan en páginas aisladas.',
+    stat: `${INAM_RESEARCH_CENTERS.length + INAM_LABS.length + INAM_EXPERIMENTAL_CENTERS.length} activos`,
+    href: '/centros-investigacion',
+    icon: FlaskConical,
+  },
+  {
+    eyebrow: 'Grupos',
+    title: 'Grupos de investigación',
+    text: 'Explora 19 grupos con investigadores titulares en cambio climático, biodiversidad, aguas, suelos y tecnología ambiental.',
+    stat: `${INAM_GROUPS.length} grupos`,
+    href: '/grupos-investigacion',
+    icon: Users,
+  },
+  {
+    eyebrow: 'Producción',
+    title: 'Publicaciones, fondos y proyectos',
+    text: 'Concentra producción científica, financiamiento competitivo y proyectos de inversión pública en un solo recorrido más compacto.',
+    stat: `${INAM_PUBLICATIONS.length + INAM_COMPETITIVE_FUNDS.length + INAM_PUBLIC_INVESTMENT_PROJECTS.length} registros`,
+    href: '/publicaciones',
+    icon: BookOpen,
+  },
+];
+
+const highlights = [
+  'Monitoreo ambiental con enfoque de cuenca y paisaje.',
+  'Articulación con grupos de biodiversidad, economía ambiental y microbiología.',
+  'Producción científica, formación investigativa y transferencia de conocimiento.',
+  'Identidad visual inspirada en sitios de investigación como CHIC, pero adaptada al contexto amazónico andino.',
+];
+
+const imagery = {
+  heroPoster: INAM_REFERENCE_IMAGES.hero,
+  institute: INAM_REFERENCE_IMAGES.heroSecondary,
+  centers: INAM_REFERENCE_IMAGES.centers,
+  labs: INAM_REFERENCE_IMAGES.labs,
+  projects: INAM_REFERENCE_IMAGES.projects,
+};
+
+const heroVideo = withBase('/chachapoyas-amazonas-hero.mp4');
+---
+
+<BaseLayout
+  title="INAM | Instituto de Investigación en Ingeniería Ambiental"
+  description="Propuesta web para el Instituto de Investigación en Ingeniería Ambiental de la UNTRM, con un lenguaje editorial, científico y territorial."
+>
+  <section id="inicio" class="relative flex min-h-[92vh] items-center overflow-hidden">
+    <div class="absolute inset-0">
+      <video
+        class="h-full w-full object-cover"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={imagery.heroPoster}
+        aria-hidden="true"
+      >
+        <source src={heroVideo} type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,39,33,0.94)_0%,rgba(18,54,43,0.84)_38%,rgba(31,110,86,0.48)_68%,rgba(31,110,86,0.18)_100%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(49,159,122,0.30),_transparent_28%)]"></div>
+    </div>
+
+    <div class="relative mx-auto grid min-h-[92vh] max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:items-center lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:py-24">
+      <div class="flex flex-col justify-center lg:pr-6">
+        <div class="max-w-4xl space-y-8">
+          <div class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold tracking-[0.22em] text-white uppercase shadow-sm backdrop-blur">
+            <Mountain className="h-4 w-4 text-[#83d8bc]" />
+            Instituto de Investigación en Ingeniería Ambiental
+          </div>
+
+          <div class="space-y-6">
+            <p class="max-w-xl text-sm font-semibold uppercase tracking-[0.28em] text-white/70">
+              Universidad Nacional Toribio Rodríguez de Mendoza de Amazonas
+            </p>
+            <h1 class="max-w-5xl font-[var(--font-display)] text-3xl leading-none tracking-tight text-white sm:text-6xl lg:text-6xl">
+              Ciencia e innovación para un desarrollo sustentable
+            </h1>
+            <p class="max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
+              El INAM impulsa investigación, formación y transferencia de conocimiento en biodiversidad, recursos hídricos, microbiología y sostenibilidad, con una mirada científica conectada al territorio amazónico.
+            </p>
+            <p class="max-w-2xl text-sm leading-7 text-white/62">
+              La estructura de contenidos de este sitio se reorganizó a partir del feed oficial del INAM consultado el 20 de abril de 2026, para distribuir mejor grupos, centros, laboratorios, fondos y publicaciones en páginas específicas.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-4 sm:flex-row">
+            <a
+              href="#lineas"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-semibold text-white shadow-2xl shadow-[var(--color-accent)]/30 transition-transform duration-300 hover:-translate-y-0.5"
+            >
+              Explorar líneas de investigación
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#contacto"
+              class="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/8 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-white/14"
+            >
+              Contacto institucional
+            </a>
+          </div>
+
+          <div class="grid gap-4 border-t border-white/20 pt-8 sm:grid-cols-2 lg:grid-cols-4">
+            {metrics.map((metric) => (
+              <div class="space-y-3 rounded-3xl border border-white/15 bg-white/8 p-5 shadow-sm backdrop-blur">
+                <p class="font-[var(--font-display)] text-3xl text-white">{metric.value}</p>
+                <p class="text-sm leading-6 text-white/72">{metric.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center lg:justify-end">
+        <div class="w-full max-w-xl rounded-[2rem] border border-white/15 bg-white/10 p-5 shadow-[0_25px_80px_rgba(7,18,15,0.28)] backdrop-blur-md">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="overflow-hidden rounded-[1.4rem] bg-white/90">
+              <img
+                src={imagery.centers}
+                alt="Imagen de centros de investigación en la referencia oficial del INAM"
+                class="h-44 w-full object-cover"
+                loading="lazy"
+              />
+              <div class="p-4">
+                <Users className="h-7 w-7 text-[var(--color-accent)]" />
+                <p class="mt-3 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">Infraestructura</p>
+                <p class="mt-2 text-sm leading-6 text-[var(--color-body)]">
+                  La portada oficial del instituto muestra centros y laboratorios como parte del corazón operativo de la investigación.
+                </p>
+              </div>
+            </div>
+
+            <div class="overflow-hidden rounded-[1.4rem] bg-white/90">
+              <img
+                src={imagery.projects}
+                alt="Imagen de proyectos de investigación en la referencia oficial del INAM"
+                class="h-44 w-full object-cover"
+                loading="lazy"
+              />
+              <div class="p-4">
+                <Microscope className="h-7 w-7 text-[var(--color-accent)]" />
+                <p class="mt-3 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">Producción</p>
+                <p class="mt-2 text-sm leading-6 text-[var(--color-body)]">
+                  La referencia oficial también exhibe fondos y proyectos, así que aquí se integran con publicaciones en una vista conjunta.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 rounded-[1.5rem] border border-white/12 bg-[rgba(14,45,37,0.62)] p-5 text-white">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-white/60">Referencia del diseño original</p>
+            <p class="mt-3 text-base leading-7 text-white/78">
+              Esta versión recupera el gesto principal del template original: una imagen de fondo protagonista con contenido superpuesto, mayor contraste y una entrada visual más cinematográfica.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="h-6 w-6 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </section>
+
+  <section id="instituto" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <div class="space-y-5">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">El Instituto</p>
+        <h2 class="font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)] sm:text-4xl">
+          Investigación aplicada para comprender y transformar problemas ambientales complejos.
+        </h2>
+        <div class="overflow-hidden rounded-[2rem] border border-[var(--color-border)] shadow-sm">
+          <img
+            src={imagery.institute}
+            alt="Imagen de banner oficial del instituto en la referencia UNTRM"
+            class="h-80 w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div class="space-y-6 text-lg leading-8 text-[var(--color-body)]">
+        <p>
+          Esta adaptación reposiciona la plantilla original como una página principal para el <strong>Instituto de Investigación en Ingeniería Ambiental (INAM)</strong>, enfatizando identidad académica, legitimidad científica y vínculo con el territorio.
+        </p>
+        <p>
+          Además de la portada, esta versión compacta mejor la arquitectura: infraestructura y territorio viven juntos, y publicaciones con fondos y proyectos también comparten una sola vista para reducir dispersión.
+        </p>
+        <div class="grid gap-3 pt-2">
+          {highlights.map((item) => (
+            <div class="flex items-start gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3">
+              <span class="mt-1 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]"></span>
+              <p class="text-base leading-7 text-[var(--color-body)]">{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lineas" class="border-y border-[var(--color-border)] bg-[var(--color-surface)]">
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div class="flex max-w-3xl flex-col gap-5">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">Líneas Prioritarias</p>
+        <h2 class="font-[var(--font-display)] text-4xl leading-tight text-[var(--color-ink)] sm:text-5xl">
+          Áreas desde las que el instituto puede proyectar investigación, formación y cooperación.
+        </h2>
+      </div>
+
+      <div class="mt-14 grid gap-6 lg:grid-cols-3">
+        {lines.map(({ title, description, icon: Icon }) => (
+          <article class="group rounded-[2rem] border border-[var(--color-border)] bg-white p-8 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div class="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-surface-strong)] text-[var(--color-accent)]">
+              <Icon className="h-7 w-7" />
+            </div>
+            <h3 class="mt-8 font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)]">{title}</h3>
+            <p class="mt-5 text-base leading-8 text-[var(--color-body)]">{description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="plataformas" class="relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src={imagery.labs}
+        alt="Imagen de laboratorios en la referencia oficial del INAM"
+        class="h-full w-full object-cover object-center"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,244,236,0.70),rgba(248,244,236,0.82))]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(49,159,122,0.14),_transparent_28%)]"></div>
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {platforms.map(({ eyebrow, title, text, stat, href, icon: Icon }) => (
+        <article class="rounded-[2rem] border border-white/60 bg-white/82 p-8 shadow-sm backdrop-blur-md">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">{eyebrow}</p>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="max-w-xs font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)]">{title}</h3>
+            <Icon className="h-7 w-7 shrink-0 text-[var(--color-accent)]" />
+          </div>
+          <p class="mt-6 text-base leading-8 text-[var(--color-body)]">{text}</p>
+          <div class="mt-6 flex items-center justify-between gap-4">
+            <span class="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-accent)]">{stat}</span>
+            <a href={withBase(href)} class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)]">
+              Ver página
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </article>
+      ))}
+      </div>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <article class="rounded-[2rem] border border-white/60 bg-white/78 p-8 shadow-sm backdrop-blur-md">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--color-muted)]">Infraestructura científica</p>
+          <div class="mt-6 flex items-start justify-between gap-4">
+            <h3 class="max-w-lg font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)]">
+              Infraestructura y territorio en una sola página contenedora
+            </h3>
+            <FlaskConical className="h-7 w-7 shrink-0 text-[var(--color-accent)]" />
+          </div>
+          <p class="mt-6 text-base leading-8 text-[var(--color-body)]">
+            El feed consultado muestra {INAM_RESEARCH_CENTERS.length} centros de investigación, {INAM_LABS.length} laboratorios/plataformas técnicas y {INAM_EXPERIMENTAL_CENTERS.length} estaciones experimentales. Aquí quedan juntos para ahorrar pasos de navegación.
+          </p>
+          <a
+            href={withBase('/centros-investigacion')}
+            class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)]"
+          >
+            Explorar infraestructura
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </article>
+
+        <article class="rounded-[2rem] border border-white/60 bg-[rgba(18,54,43,0.78)] p-8 text-white shadow-sm backdrop-blur-md">
+          <p class="text-sm font-semibold uppercase tracking-[0.24em] text-white/60">Fuente oficial</p>
+          <h3 class="mt-6 font-[var(--font-display)] text-3xl leading-tight">
+            Organización basada en el dataset del INAM consultado el 20 de abril de 2026.
+          </h3>
+          <p class="mt-6 text-base leading-8 text-white/76">
+            La referencia oficial usa el feed del slug del instituto para cargar centros, laboratorios, grupos, fondos, proyectos y publicaciones. Aquí lo reorganizamos en menos vistas principales para que el recorrido sea más corto.
+          </p>
+          <a
+            href={INAM_SOURCE.officialPage}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#9ee4cb]"
+          >
+            Revisar referencia UNTRM
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="noticias" class="relative overflow-hidden bg-[var(--color-accent-deep)] text-white">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(185,219,168,0.22),_transparent_28%),linear-gradient(180deg,rgba(20,58,52,0.95),rgba(16,44,40,1))]"></div>
+    <div class="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8 lg:py-28">
+      <div class="space-y-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-white/60">Noticias y Difusión</p>
+        <h2 class="font-[var(--font-display)] text-4xl leading-tight sm:text-5xl">
+          Un sitio preparado para visibilizar convocatorias, publicaciones y actividades científicas.
+        </h2>
+        <p class="max-w-xl text-lg leading-8 text-white/76">
+          Siguiendo la referencia de Cape Horn Center, esta sección está pensada para destacar noticias recientes, seminarios, conferencias, publicaciones y acciones de transferencia del conocimiento.
+        </p>
+      </div>
+
+      <div class="grid gap-5">
+        <article class="rounded-[2rem] border border-white/10 bg-white/8 p-6 backdrop-blur">
+          <p class="text-sm uppercase tracking-[0.22em] text-white/55">Publicación destacada</p>
+          <h3 class="mt-4 font-[var(--font-display)] text-3xl">Biodiversidad, microbiología y ciencia aplicada desde Amazonas</h3>
+          <p class="mt-4 text-base leading-8 text-white/76">
+            La interfaz puede exhibir producción científica, resultados de laboratorio, proyectos interdisciplinarios y colaboraciones con otras instituciones nacionales e internacionales.
+          </p>
+        </article>
+        <article class="rounded-[2rem] border border-white/10 bg-white/8 p-6 backdrop-blur">
+          <p class="text-sm uppercase tracking-[0.22em] text-white/55">Próximas acciones</p>
+          <h3 class="mt-4 font-[var(--font-display)] text-3xl">Seminarios, convocatorias y experiencias de campo</h3>
+          <p class="mt-4 text-base leading-8 text-white/76">
+            El diseño queda listo para incorporar cronogramas, botones de registro, galerías o accesos a documentos institucionales sin perder la identidad editorial.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <div class="relative overflow-hidden rounded-[2.4rem] border border-[var(--color-border)] shadow-sm">
+      <div class="absolute inset-0">
+        <img
+          src={imagery.projects}
+          alt="Imagen oficial de proyectos del instituto"
+          class="h-full w-full object-cover object-center"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,253,248,0.68),rgba(246,241,232,0.78))]"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,253,248,0.18),rgba(31,110,86,0.12))]"></div>
+      </div>
+    <div class="relative grid gap-8 p-8 lg:grid-cols-[1fr_auto] lg:items-end lg:p-12">
+      <div class="space-y-5">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-muted)]">Contacto Institucional</p>
+        <h2 class="max-w-3xl font-[var(--font-display)] text-4xl leading-tight text-[var(--color-ink)] sm:text-5xl">
+          Un espacio digital pensado para comunicar investigación con claridad, prestigio y pertenencia territorial.
+        </h2>
+        <p class="max-w-2xl text-lg leading-8 text-[var(--color-body)]">
+          Puedes usar esta base para seguir completando autoridades, investigadores, proyectos, fondos concursables, noticias y enlaces oficiales del instituto.
+        </p>
+        <div class="grid gap-3 pt-2 text-sm leading-7 text-[var(--color-body)]">
+          <div class="rounded-2xl border border-[var(--color-border)] bg-white/70 px-4 py-3">
+            <strong>Sede central:</strong> {INAM_CONTACT.campus}
+          </div>
+          <div class="rounded-2xl border border-[var(--color-border)] bg-white/70 px-4 py-3">
+            <strong>Contacto institucional visible:</strong> {INAM_CONTACT.transparencyContact}
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <a
+          href="https://untrm.edu.pe/instituto-de-investigacion/?slug=instituto-de-investigacion-en-ingenieria-ambiental-inam"
+          class="inline-flex items-center justify-center rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[var(--color-accent)]/20 transition-transform duration-300 hover:-translate-y-0.5"
+        >
+          Ver referencia UNTRM
+        </a>
+        <a
+          href={`mailto:${INAM_CONTACT.email}`}
+          class="inline-flex items-center justify-center rounded-full border border-[var(--color-border-strong)] bg-white px-7 py-3.5 text-sm font-semibold text-[var(--color-ink)]"
+        >
+          {INAM_CONTACT.email}
+        </a>
+      </div>
+    </div>
+    </div>
+  </section>
+</BaseLayout>

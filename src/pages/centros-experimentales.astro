@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Leaf, MapPin, Mountain, Sprout } from 'lucide-react';
+import { INAM_EXPERIMENTAL_CENTERS, INAM_REFERENCE_IMAGES } from '@utils/inam-data';
+---
+
+<BaseLayout
+  title="Centros Experimentales | INAM"
+  description="Centros experimentales visibles en la fuente oficial consultada para el INAM de la UNTRM."
+>
+  <section class="relative overflow-hidden bg-[var(--color-accent-deep)] text-white">
+    <div class="absolute inset-0">
+      <img src={INAM_REFERENCE_IMAGES.experimental} alt="Centros experimentales en la referencia oficial del INAM" class="h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(16,44,40,0.92),rgba(16,44,40,0.76),rgba(16,44,40,0.4))]"></div>
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div class="max-w-4xl space-y-6">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-white/60">Centros Experimentales</p>
+        <h1 class="font-[var(--font-display)] text-5xl leading-tight sm:text-6xl">
+          Espacios territoriales para validación, conservación e investigación aplicada.
+        </h1>
+        <p class="max-w-2xl text-lg leading-8 text-white/78">
+          La fuente oficial consultada lista siete estaciones experimentales distribuidas en Chachapoyas, Luya, Bagua y Rodríguez de Mendoza.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <div class="grid gap-6 lg:grid-cols-2">
+      {INAM_EXPERIMENTAL_CENTERS.map((center, index) => (
+        <article class="rounded-[2rem] border border-[var(--color-border)] bg-white p-8 shadow-sm">
+          <div class="flex items-start justify-between gap-4">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--color-surface-strong)] text-[var(--color-accent)]">
+              {index % 2 === 0 ? <Mountain className="h-6 w-6" /> : <Sprout className="h-6 w-6" />}
+            </div>
+            <span class="rounded-full bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-muted)]">
+              Experimental
+            </span>
+          </div>
+
+          <h2 class="mt-6 font-[var(--font-display)] text-3xl leading-tight text-[var(--color-ink)]">{center.title}</h2>
+          <p class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-accent)]">
+            <MapPin className="h-4 w-4" />
+            {center.location}
+          </p>
+          <p class="mt-5 text-base leading-8 text-[var(--color-body)]">{center.summary}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+    <div class="rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+      <div class="flex items-start gap-4">
+        <Leaf className="mt-1 h-6 w-6 text-[var(--color-accent)]" />
+        <div class="space-y-3">
+          <h2 class="font-[var(--font-display)] text-3xl text-[var(--color-ink)]">Cobertura territorial</h2>
+          <p class="max-w-3xl text-base leading-8 text-[var(--color-body)]">
+            En la colección oficial aparecen estaciones en Magdalena, Molinopampa, Copallín, Lamud, Lonya Chico y Rodríguez de Mendoza, lo que refuerza la proyección regional de la investigación de la UNTRM en Amazonas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
