@@ -1,0 +1,9 @@
+# Ignore everything by default.
+*
+
+# Keep this file so the ignore rules can be tracked.
+!.gitignore
+
+# Keep only the generated site output.
+!dist/
+!dist/**
