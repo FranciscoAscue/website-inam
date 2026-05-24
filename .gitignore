@@ -4,6 +4,11 @@
 # Keep this file so the ignore rules can be tracked.
 !.gitignore
 
+# Keep the GitHub Pages workflow.
+!.github/
+!.github/workflows/
+!.github/workflows/deploy.yml
+
 # Keep only the generated site output.
 !dist/
 !dist/**
