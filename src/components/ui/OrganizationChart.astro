@@ -1,0 +1,200 @@
+---
+import { ArrowDown, ArrowUpRight, X } from 'lucide-react';
+import { withBase } from '@utils/paths';
+
+interface OrganizationUnit {
+  id: string;
+  eyebrow: string;
+  name: string;
+  summary: string;
+  parent: string;
+  relation: string;
+}
+
+const units: OrganizationUnit[] = [
+  {
+    id: 'directorio',
+    eyebrow: 'Nivel superior',
+    name: 'Directorio',
+    summary: 'Órgano ubicado en el nivel superior de la estructura institucional del INAM.',
+    parent: 'Máximo nivel del organigrama',
+    relation: 'Dirección del INAM',
+  },
+  {
+    id: 'direccion',
+    eyebrow: 'Conducción institucional',
+    name: 'Dirección del INAM',
+    summary: 'Unidad central desde la que se articula la estructura directiva, administrativa y consultiva del instituto.',
+    parent: 'Directorio',
+    relation: 'Consejo Directivo, Coordinación Administrativa y Comité Consultivo',
+  },
+  {
+    id: 'coordinacion-administrativa',
+    eyebrow: 'Soporte institucional',
+    name: 'Coordinación Administrativa',
+    summary: 'Unidad de apoyo administrativo vinculada directamente con la Dirección del INAM.',
+    parent: 'Dirección del INAM',
+    relation: 'Gestión administrativa del instituto',
+  },
+  {
+    id: 'consejo-directivo',
+    eyebrow: 'Gobierno institucional',
+    name: 'Consejo Directivo',
+    summary: 'Órgano directivo del que se desprenden el seguimiento, la articulación de proyectos y la investigación.',
+    parent: 'Dirección del INAM',
+    relation: 'Comité de Seguimiento y las dos subdirecciones',
+  },
+  {
+    id: 'comite-consultivo',
+    eyebrow: 'Órgano de consulta',
+    name: 'Comité Consultivo',
+    summary: 'Instancia consultiva vinculada de forma directa con la Dirección del INAM.',
+    parent: 'Dirección del INAM',
+    relation: 'Dirección del INAM',
+  },
+  {
+    id: 'seguimiento',
+    eyebrow: 'Seguimiento institucional',
+    name: 'Comité de Seguimiento y Monitoreo',
+    summary: 'Órgano de seguimiento y monitoreo integrado en la estructura del Consejo Directivo.',
+    parent: 'Consejo Directivo',
+    relation: 'Seguimiento de la actividad institucional',
+  },
+  {
+    id: 'proyectos',
+    eyebrow: 'Articulación y transferencia',
+    name: 'Subdirección de Proyectos, Articulación y Transferencia',
+    summary: 'Unidad especializada en proyectos, articulación institucional y transferencia de conocimiento.',
+    parent: 'Consejo Directivo',
+    relation: 'Proyectos, cooperación y transferencia',
+  },
+  {
+    id: 'investigacion',
+    eyebrow: 'Gestión científica',
+    name: 'Subdirección de Investigación',
+    summary: 'Unidad que integra las dos ramas científicas del instituto: centros y grupos de investigación.',
+    parent: 'Consejo Directivo',
+    relation: 'Centros y grupos de investigación',
+  },
+];
+
+const unitById = Object.fromEntries(units.map((unit) => [unit.id, unit]));
+const directionUnits = ['coordinacion-administrativa', 'consejo-directivo', 'comite-consultivo'].map((id) => unitById[id]);
+const councilUnits = ['seguimiento', 'proyectos', 'investigacion'].map((id) => unitById[id]);
+---
+
+<section aria-labelledby="estructura-title">
+  <div class="mx-auto max-w-3xl text-center">
+    <p class="section-kicker">Estructura directiva</p>
+    <h2 id="estructura-title" class="section-title mx-auto mt-4">Organización del instituto</h2>
+    <p class="mt-4 text-sm leading-7 text-[var(--color-body)]">Selecciona una unidad para conocer su ubicación y relación dentro de la estructura.</p>
+  </div>
+
+  <div class="org-chart mt-12">
+    <button type="button" class="org-chart-node org-chart-node-primary" data-org-dialog-open="directorio">
+      <span>{unitById.directorio.eyebrow}</span>
+      <strong>{unitById.directorio.name}</strong>
+      <small>Ver detalle <ArrowUpRight className="h-3.5 w-3.5" /></small>
+    </button>
+
+    <div class="org-chart-connector"><ArrowDown className="h-4 w-4" /></div>
+
+    <button type="button" class="org-chart-node org-chart-node-primary" data-org-dialog-open="direccion">
+      <span>{unitById.direccion.eyebrow}</span>
+      <strong>{unitById.direccion.name}</strong>
+      <small>Ver detalle <ArrowUpRight className="h-3.5 w-3.5" /></small>
+    </button>
+
+    <div class="org-chart-connector"><ArrowDown className="h-4 w-4" /></div>
+    <p class="org-chart-level-label">Unidades vinculadas a la Dirección</p>
+    <div class="org-chart-branch org-chart-branch-three">
+      {directionUnits.map((unit) => (
+        <button type="button" class:list={['org-chart-node', unit.id === 'consejo-directivo' && 'org-chart-node-emphasis']} data-org-dialog-open={unit.id}>
+          <span>{unit.eyebrow}</span>
+          <strong>{unit.name}</strong>
+          <small>Ver detalle <ArrowUpRight className="h-3.5 w-3.5" /></small>
+        </button>
+      ))}
+    </div>
+
+    <div class="org-chart-connector"><ArrowDown className="h-4 w-4" /></div>
+    <p class="org-chart-level-label">Unidades del Consejo Directivo</p>
+    <div class="org-chart-branch org-chart-branch-three">
+      {councilUnits.map((unit) => (
+        <button type="button" class:list={['org-chart-node', unit.id === 'investigacion' && 'org-chart-node-emphasis']} data-org-dialog-open={unit.id}>
+          <span>{unit.eyebrow}</span>
+          <strong>{unit.name}</strong>
+          <small>Ver detalle <ArrowUpRight className="h-3.5 w-3.5" /></small>
+        </button>
+      ))}
+    </div>
+
+    <div class="org-chart-connector"><ArrowDown className="h-4 w-4" /></div>
+    <p class="org-chart-level-label">Estructura científica</p>
+    <div class="org-chart-branch org-chart-branch-two">
+      <a href={withBase('/centros-investigacion')} class="org-chart-node org-chart-outcome">
+        <span>Subdirección de Investigación</span>
+        <strong>Centros de investigación</strong>
+        <small>2 centros <ArrowUpRight className="h-3.5 w-3.5" /></small>
+      </a>
+      <a href={withBase('/grupos-investigacion')} class="org-chart-node org-chart-outcome">
+        <span>Subdirección de Investigación</span>
+        <strong>Grupos de investigación</strong>
+        <small>7 grupos <ArrowUpRight className="h-3.5 w-3.5" /></small>
+      </a>
+    </div>
+  </div>
+</section>
+
+{units.map((unit) => (
+  <dialog id={`org-${unit.id}`} class="org-detail-dialog m-auto w-[calc(100%-2rem)] max-w-xl rounded-2xl border border-[var(--color-border)] bg-white p-0 text-[var(--color-ink)] shadow-2xl backdrop:bg-[#102c28]/70 backdrop:backdrop-blur-sm" aria-labelledby={`org-${unit.id}-title`}>
+    <div class="p-6 sm:p-8">
+      <div class="flex items-start justify-between gap-5">
+        <div>
+          <p class="section-kicker">{unit.eyebrow}</p>
+          <h3 id={`org-${unit.id}-title`} class="mt-3 text-2xl font-semibold leading-tight tracking-tight">{unit.name}</h3>
+        </div>
+        <button type="button" data-org-dialog-close class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[var(--color-muted)] hover:bg-[var(--color-surface)]" aria-label="Cerrar detalle">
+          <X className="h-5 w-5" />
+        </button>
+      </div>
+      <p class="mt-6 text-base leading-7 text-[var(--color-body)]">{unit.summary}</p>
+      <dl class="mt-7 divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+        <div class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr]">
+          <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">Depende de</dt>
+          <dd class="text-sm leading-6">{unit.parent}</dd>
+        </div>
+        <div class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr]">
+          <dt class="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">Relación</dt>
+          <dd class="text-sm leading-6">{unit.relation}</dd>
+        </div>
+      </dl>
+    </div>
+  </dialog>
+))}
+
+<script>
+  const bindOrganizationDialogs = () => {
+    document.querySelectorAll<HTMLButtonElement>('[data-org-dialog-open]').forEach((trigger) => {
+      if (trigger.dataset.bound === 'true') return;
+      trigger.dataset.bound = 'true';
+      trigger.addEventListener('click', () => {
+        const target = trigger.dataset.orgDialogOpen;
+        const dialog = target ? document.getElementById(`org-${target}`) : null;
+        if (dialog instanceof HTMLDialogElement) dialog.showModal();
+      });
+    });
+
+    document.querySelectorAll<HTMLDialogElement>('.org-detail-dialog').forEach((dialog) => {
+      if (dialog.dataset.bound === 'true') return;
+      dialog.dataset.bound = 'true';
+      dialog.querySelector<HTMLButtonElement>('[data-org-dialog-close]')?.addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    });
+  };
+
+  bindOrganizationDialogs();
+  document.addEventListener('astro:page-load', bindOrganizationDialogs);
+</script>

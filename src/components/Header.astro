@@ -4,11 +4,15 @@ import MobileMenu from '@components/react/MobileMenu';
 import { withBase } from '@utils/paths';
 
 const { currentPathname } = Astro.props;
+const normalizePath = (pathname: string): string => {
+  const normalized = pathname.replace(/\/+$/, '');
+  return normalized || '/';
+};
+
 const isActiveLink = (href: string) : boolean => {
   const [path] = href.split('#');
   if (!path) return false;
-  if (path === '/') return currentPathname === '/';
-  return currentPathname === path;
+  return normalizePath(currentPathname) === normalizePath(path);
 };
 
 ---

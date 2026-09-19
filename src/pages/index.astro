@@ -1,16 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ArrowRight, BookOpen, Building2, ExternalLink, Mail, MapPin, Network, Users } from 'lucide-react';
-import { frontmatter } from '../content/publicaciones.md';
-import { CONTACT, RESEARCH_CENTERS, RESEARCH_GROUPS, RESEARCH_PROJECTS } from '@utils/inam-content';
+import { CONTACT } from '@utils/inam-content';
 import { withBase } from '@utils/paths';
-
-const metrics = [
-  { value: RESEARCH_CENTERS.length, label: 'centros de investigación' },
-  { value: RESEARCH_GROUPS.length, label: 'grupos especializados' },
-  { value: frontmatter.publications.length, label: 'publicaciones científicas' },
-  { value: RESEARCH_PROJECTS.length, label: 'proyectos financiados' },
-];
 
 const routes = [
   {
@@ -72,20 +64,8 @@ const routes = [
           <a href={withBase('/grupos-investigacion')} class="button-primary button-on-dark">
             Conocer los grupos <ArrowRight className="h-4 w-4" />
           </a>
-          <a href={withBase('/publicaciones')} class="button-secondary button-secondary-dark">Ver publicaciones</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section aria-label="Resumen institucional" class="relative z-10 -mt-px border-b border-[var(--color-border)] bg-white">
-    <div class="mx-auto grid max-w-7xl grid-cols-2 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
-      {metrics.map((metric) => (
-        <div class="border-[var(--color-border)] px-3 py-7 even:border-l lg:border-l">
-          <p class="text-3xl font-semibold tracking-tight text-[var(--color-ink)]">{metric.value}</p>
-          <p class="mt-1 text-sm text-[var(--color-muted)]">{metric.label}</p>
-        </div>
-      ))}
     </div>
   </section>
 
