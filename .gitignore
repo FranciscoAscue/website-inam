@@ -4,6 +4,13 @@
 # Keep this file so the ignore rules can be tracked.
 !.gitignore
 
+# Keep the Astro build configuration used by GitHub Pages.
+!package.json
+!package-lock.json
+!astro.config.mjs
+!tsconfig.json
+!tailwind.config.mjs
+
 # Keep template source visible for Tailwind class detection during local builds.
 !src/
 src/*
@@ -15,6 +22,15 @@ src/*
 !src/pages/**
 !src/styles/
 !src/styles/**
+!src/config/
+src/config/*
+!src/config/site.ts
+!src/content/
+!src/content/**
+!src/utils/
+src/utils/*
+!src/utils/inam-content.ts
+!src/utils/paths.ts
 
 # Keep the GitHub Pages workflow.
 !.github/

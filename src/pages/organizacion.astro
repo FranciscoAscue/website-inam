@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '@components/ui/PageHero.astro';
+import { ArrowDown, Building2, Users } from 'lucide-react';
+import { RESEARCH_CENTERS, RESEARCH_GROUPS } from '@utils/inam-content';
+import { withBase } from '@utils/paths';
+---
+
+<BaseLayout
+  title="Organización | INAM"
+  description="Estructura institucional, centros y responsables del Instituto de Investigación en Ingeniería Ambiental."
+>
+  <PageHero
+    kicker="Organización institucional"
+    title="Una estructura que conecta gestión e investigación."
+    intro="Conoce cómo se articulan los órganos de gobierno, las subdirecciones, los centros y los grupos de investigación del INAM."
+    image="/amazonas-river-peru.jpg"
+    imageAlt="Paisaje fluvial y montañoso de Amazonas"
+  />
+
+  <main class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <section aria-labelledby="estructura-title">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="section-kicker">Estructura directiva</p>
+        <h2 id="estructura-title" class="section-title mx-auto mt-4">Organización del instituto</h2>
+      </div>
+
+      <div class="mt-10">
+        <div class="org-node org-node-primary">Directorio</div>
+        <ArrowDown className="org-arrow" />
+        <div class="org-node org-node-primary">Dirección del INAM</div>
+        <ArrowDown className="org-arrow" />
+
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="org-node">Coordinación Administrativa</div>
+          <div class="org-node org-node-primary">Consejo Directivo</div>
+          <div class="org-node">Comité Consultivo</div>
+        </div>
+
+        <ArrowDown className="org-arrow" />
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="org-node">Comité de Seguimiento y Monitoreo</div>
+          <div class="org-node">Subdirección de Proyectos, Articulación y Transferencia</div>
+          <div class="org-node org-node-primary">Subdirección de Investigación</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-20 border-t border-[var(--color-border)] pt-14" aria-labelledby="centros-title">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="section-kicker">Subdirección de Investigación</p>
+          <h2 id="centros-title" class="section-title mt-4">Centros y responsables</h2>
+        </div>
+        <a href={withBase('/centros-investigacion')} class="text-sm font-semibold text-[var(--color-accent-deep)]">Ver centros →</a>
+      </div>
+
+      <div class="mt-9 grid gap-5 md:grid-cols-2">
+        {RESEARCH_CENTERS.map((center) => (
+          <article class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-7">
+            <div class="flex items-center gap-3 text-[var(--color-accent-deep)]">
+              <Building2 className="h-5 w-5" />
+              <span class="text-xs font-bold uppercase tracking-[0.16em]">{center.acronym}</span>
+            </div>
+            <h3 class="mt-4 text-xl font-semibold leading-snug text-[var(--color-ink)]">{center.name}</h3>
+            <p class="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">Coordinación</p>
+            <p class="mt-1 text-sm font-semibold text-[var(--color-ink)]">{center.coordinator}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16 border-t border-[var(--color-border)] pt-14" aria-labelledby="grupos-title">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="section-kicker">Equipos científicos</p>
+          <h2 id="grupos-title" class="section-title mt-4">Grupos de investigación</h2>
+        </div>
+        <a href={withBase('/grupos-investigacion')} class="text-sm font-semibold text-[var(--color-accent-deep)]">Conocer los grupos →</a>
+      </div>
+
+      <div class="mt-9 grid gap-x-8 md:grid-cols-2">
+        {RESEARCH_GROUPS.map((group) => (
+          <article class="flex gap-4 border-t border-[var(--color-border)] py-5">
+            <Users className="mt-1 h-5 w-5 shrink-0 text-[var(--color-accent)]" />
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-accent-deep)]">{group.acronym}</p>
+              <h3 class="mt-1 text-sm font-semibold leading-6 text-[var(--color-ink)]">{group.name}</h3>
+              {group.lead && <p class="mt-1 text-sm text-[var(--color-muted)]">Responsable: {group.lead}</p>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

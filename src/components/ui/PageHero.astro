@@ -1,0 +1,29 @@
+---
+import { withBase } from '@utils/paths';
+
+interface Props {
+  kicker: string;
+  title: string;
+  intro: string;
+  image: string;
+  imageAlt: string;
+}
+
+const { kicker, title, intro, image, imageAlt } = Astro.props;
+---
+
+<header class="relative isolate overflow-hidden bg-[#123a31] text-white">
+  <img
+    src={withBase(image)}
+    alt={imageAlt}
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+  />
+  <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(10,39,32,.94),rgba(10,39,32,.72)_58%,rgba(10,39,32,.26))]"></div>
+  <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#a9e2cf]">{kicker}</p>
+    <h1 class="mt-5 max-w-5xl text-4xl font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+      {title}
+    </h1>
+    <p class="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">{intro}</p>
+  </div>
+</header>
