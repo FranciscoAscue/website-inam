@@ -36,10 +36,10 @@ jobs:
           mkdir -p public
           cp "dist/LOGO INAM FINAL.png" public/
           cp dist/favicon.svg public/
-          cp dist/amazonas-river-peru.jpg public/
-          cp dist/amazonas-waterfall.jpg public/
-          cp dist/kuelap-amazonas.jpg public/
-          cp dist/sonche-canyon-chachapoyas.jpg public/
+          cp dist/amazonas-river-peru.webp public/
+          cp dist/amazonas-waterfall.webp public/
+          cp dist/kuelap-amazonas.webp public/
+          cp dist/sonche-canyon-chachapoyas.webp public/
           cp dist/chachapoyas-amazonas-hero.mp4 public/
 
       - name: Build Astro site
