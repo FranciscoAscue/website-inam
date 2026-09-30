@@ -6,19 +6,19 @@ import { withBase } from '@utils/paths';
 
 const routes = [
   {
-    title: 'Centros de investigación',
-    text: 'Biotecnología, genómica vegetal, biodiversidad y bioeconomía.',
+    title: 'Centros y grupos de investigación',
+    text: 'Conoce nuestras unidades especializadas y los equipos que investigan los desafíos del territorio.',
     href: '/centros-investigacion',
     image: '/amazonas-waterfall.webp',
     imageAlt: 'Cascada en el bosque amazónico',
     icon: Building2,
   },
   {
-    title: 'Grupos de investigación',
-    text: 'Siete equipos que estudian los desafíos ambientales y productivos del territorio.',
-    href: '/grupos-investigacion',
-    image: '/sonche-canyon-chachapoyas.webp',
-    imageAlt: 'Vista del cañón del Sonche',
+    title: 'Investigadores',
+    text: 'Encuentra perfiles de investigadoras e investigadores por ocupación y nivel RENACYT.',
+    href: '/investigadores',
+    image: '/amazonas-river-peru.webp',
+    imageAlt: 'Río amazónico entre la vegetación de Amazonas',
     icon: Users,
   },
   {
@@ -36,7 +36,7 @@ const routes = [
   title="INAM | Investigación para la biodiversidad y el territorio"
   description="Centros, grupos y producción científica del Instituto de Investigación en Ingeniería Ambiental de la UNTRM."
 >
-  <section class="relative isolate min-h-[80vh] overflow-hidden bg-[#123a31] text-white">
+  <section class="brand-panel relative isolate min-h-[80vh] overflow-hidden bg-[#123a31] text-white">
     <video
       class="absolute inset-0 -z-20 h-full w-full object-cover"
       autoplay
@@ -61,8 +61,8 @@ const routes = [
           Investigación, formación y transferencia en biodiversidad, biotecnología y bioeconomía desde Amazonas para el Perú.
         </p>
         <div class="mt-9 flex flex-wrap gap-3">
-          <a href={withBase('/grupos-investigacion')} class="button-primary button-on-dark">
-            Conocer los grupos <ArrowRight className="h-4 w-4" />
+          <a href={withBase('/centros-investigacion#grupos')} class="button-primary button-on-dark">
+            Conocer nuestros grupos <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </div>
@@ -120,7 +120,7 @@ const routes = [
   <section id="contacto" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
     <div class="overflow-hidden rounded-3xl border border-[var(--color-border)] bg-white shadow-[0_22px_70px_rgba(20,49,40,.10)]">
       <div class="grid lg:grid-cols-[0.78fr_1.22fr]">
-        <div class="bg-[#123a31] p-8 text-white sm:p-10 lg:p-12">
+        <div class="brand-panel bg-[#123a31] p-8 text-white sm:p-10 lg:p-12">
           <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#a9e2cf]">Contacto institucional</p>
           <h2 class="mt-5 text-3xl font-semibold tracking-tight">Estamos en Chachapoyas.</h2>
           <p class="mt-5 text-sm leading-7 text-white/70">

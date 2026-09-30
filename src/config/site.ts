@@ -9,7 +9,7 @@ export const SITE = {
 export const NAVIGATION = [
   { name: 'Inicio', href: '/' },
   { name: 'Organización', href: '/organizacion' },
-  { name: 'Centros', href: '/centros-investigacion' },
-  { name: 'Grupos', href: '/grupos-investigacion' },
+  { name: 'Centros y grupos', href: '/centros-investigacion' },
+  { name: 'Investigadores', href: '/investigadores' },
   { name: 'Publicaciones y proyectos', href: '/publicaciones' },
 ] as const;

@@ -28,19 +28,11 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: npm ci
-
-      - name: Prepare static assets
-        run: |
-          mkdir -p public
-          cp "dist/LOGO INAM FINAL.png" public/
-          cp dist/favicon.svg public/
-          cp dist/amazonas-river-peru.webp public/
-          cp dist/amazonas-waterfall.webp public/
-          cp dist/kuelap-amazonas.webp public/
-          cp dist/sonche-canyon-chachapoyas.webp public/
-          cp dist/chachapoyas-amazonas-hero.mp4 public/
 
       - name: Build Astro site
         run: npm run build

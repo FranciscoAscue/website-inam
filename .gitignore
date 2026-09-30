@@ -31,6 +31,16 @@ src/config/*
 src/utils/*
 !src/utils/inam-content.ts
 !src/utils/paths.ts
+!src/utils/investigadores-data.json
+!src/utils/en-translations.json
+
+# Keep the locally derived public researcher portraits.
+!public/
+!public/**
+public/AstroFlow - Astrojs Logistics & Manufacturing Website Template.png
+public/speed-metrics.png
+!public/investigadores/
+!public/investigadores/**
 
 # Keep the GitHub Pages workflow.
 !.github/
@@ -40,3 +50,5 @@ src/utils/*
 # Keep only the generated site output.
 !dist/
 !dist/**
+
+*csv

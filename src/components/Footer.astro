@@ -5,11 +5,11 @@ import { CONTACT } from '@utils/inam-content';
 import { withBase } from '@utils/paths';
 ---
 
-<footer class="bg-[#0e3028] text-white">
+<footer class="brand-panel bg-[#0e3028] text-white">
   <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
     <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.25fr_.8fr_.85fr_1.1fr]">
       <div>
-        <a href={withBase('/')} class="inline-block rounded-lg bg-white p-2">
+        <a href={withBase('/')} class="logo-frame inline-block rounded-xl bg-white p-3 shadow-md ring-1 ring-white/30">
           <img
             src={withBase('/LOGO INAM FINAL.png')}
             alt="INAM - Instituto de Investigación en Ingeniería Ambiental"
@@ -34,7 +34,7 @@ import { withBase } from '@utils/paths';
         <h2 class="footer-title">Investigación</h2>
         <ul class="mt-5 space-y-3">
           <li><a href={withBase('/centros-investigacion')} class="footer-link">BIOGEV y CIEBB</a></li>
-          <li><a href={withBase('/grupos-investigacion')} class="footer-link">Grupos especializados</a></li>
+          <li><a href={withBase('/centros-investigacion#grupos')} class="footer-link">Grupos de investigación</a></li>
           <li><a href={withBase('/publicaciones')} class="footer-link">Publicaciones científicas</a></li>
           <li><a href={withBase('/publicaciones#proyectos')} class="footer-link">Proyectos financiados</a></li>
         </ul>

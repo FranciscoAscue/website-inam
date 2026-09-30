@@ -3,22 +3,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import DetailDialog from '@components/ui/DetailDialog.astro';
 import PageHero from '@components/ui/PageHero.astro';
 import { RESEARCH_CENTERS } from '@utils/inam-content';
+import { frontmatter } from '../content/publicaciones.md';
+import { projectCountForGroup, RESEARCH_GROUPS } from '@utils/inam-content';
+import { withBase } from '@utils/paths';
 ---
 
 <BaseLayout
-  title="Centros de investigación | INAM"
-  description="Centros de investigación del INAM, sus enfoques, coordinación, misión y visión."
+  title="Centros y grupos de investigación | INAM"
+  description="Conoce los centros y grupos que impulsan la investigación del INAM."
 >
   <PageHero
-    kicker="Centros de investigación"
-    title="Dos centros, una agenda científica conectada."
-    intro="Unidades especializadas en biotecnología, biodiversidad y bioeconomía al servicio del territorio amazónico."
+    kicker="Investigación en el INAM"
+    title="Centros y grupos que conectan conocimiento y territorio."
+    intro="Conoce los centros especializados y los equipos que investigan la biodiversidad, la biotecnología y el desarrollo sostenible en Amazonas."
     image="/amazonas-waterfall.webp"
     imageAlt="Cascada rodeada de bosque amazónico"
   />
 
   <main class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-    <div class="grid gap-x-12 md:grid-cols-2">
+    <section aria-labelledby="centros-title" id="centros">
+      <div class="mb-5 border-b border-[var(--color-border)] pb-5">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Unidades especializadas</p>
+        <h2 id="centros-title" class="mt-2 text-3xl font-semibold tracking-tight text-[var(--color-ink)]">Centros de investigación</h2>
+      </div>
+      <div class="grid gap-x-12 md:grid-cols-2">
       {RESEARCH_CENTERS.map((center) => (
         <DetailDialog
           id={`center-${center.slug}`}
@@ -34,7 +42,50 @@ import { RESEARCH_CENTERS } from '@utils/inam-content';
           ]}
         />
       ))}
-    </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="grupos-title" id="grupos" class="mt-16 scroll-mt-28">
+      <div class="mb-5 border-b border-[var(--color-border)] pb-5">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Equipos interdisciplinarios</p>
+        <h2 id="grupos-title" class="mt-2 text-3xl font-semibold tracking-tight text-[var(--color-ink)]">Grupos de investigación</h2>
+        <p class="mt-3 max-w-2xl text-sm leading-7 text-[var(--color-body)]">Siete equipos exploran distintas preguntas sobre la biodiversidad, los ecosistemas y el desarrollo sostenible.</p>
+      </div>
+      <div class="grid gap-x-12 md:grid-cols-2 lg:grid-cols-6">
+        {RESEARCH_GROUPS.map((group, index) => {
+          const projectCount = projectCountForGroup(group.acronym);
+          const publicationCount = frontmatter.publications.filter((publication: { groups: string[] }) =>
+            publication.groups.includes(group.acronym),
+          ).length;
+          return (
+            <div class:list={[
+              'h-full lg:col-span-2',
+              index === RESEARCH_GROUPS.length - 1 && 'md:col-span-2 md:w-[calc(50%-1.5rem)] md:justify-self-center lg:col-start-3 lg:w-auto',
+            ]}>
+              <DetailDialog
+                id={`group-${group.slug}`}
+                eyebrow={group.acronym}
+                title={group.name}
+                summary={group.summary}
+                previewRows={[
+                  ...(group.lead ? [{ label: 'Responsable', value: group.lead }] : []),
+                  { label: 'Publicaciones', value: `${publicationCount} artículos relacionados` },
+                ]}
+                actionLabel="Abrir ficha"
+                rows={[
+                  ...(group.lead ? [{ label: 'Responsable', value: group.lead }] : []),
+                  { label: 'Producción', value: `${publicationCount} publicaciones relacionadas · ${projectCount} ${projectCount === 1 ? 'proyecto financiado' : 'proyectos financiados'}` },
+                ]}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <div class="mt-8 flex flex-col gap-4 rounded-2xl bg-[var(--color-surface-strong)] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <p class="max-w-2xl text-sm leading-7 text-[var(--color-body)]">Explora los artículos científicos y proyectos vinculados a estos equipos de investigación.</p>
+        <a href={withBase('/publicaciones')} class="button-primary shrink-0">Ver publicaciones</a>
+      </div>
+    </section>
 
     <aside class="mt-14 rounded-2xl bg-[var(--color-surface)] p-6 text-sm leading-7 text-[var(--color-body)] sm:p-8">
       Los centros y grupos de investigación trabajan como unidades complementarias dentro de la Subdirección de Investigación, articulando conocimiento, formación y transferencia científica.

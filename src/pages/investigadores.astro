@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '@components/ui/PageHero.astro';
+import investigators from '@utils/investigadores-data.json';
+import { withBase } from '@utils/paths';
+
+const occupations = [...new Set(investigators.map(({ occupation }) => occupation))].sort((a, b) => a.localeCompare(b, 'es'));
+const levels = [...new Set(investigators.map(({ level }) => level))].sort((a, b) => {
+  if (a === 'Sin nivel RENACYT') return 1;
+  if (b === 'Sin nivel RENACYT') return -1;
+  if (a === 'Distinguido') return 1;
+  if (b === 'Distinguido') return -1;
+  return Number(a.match(/\d+/)?.[0] ?? 0) - Number(b.match(/\d+/)?.[0] ?? 0);
+});
+---
+
+<BaseLayout
+  title="Investigadores | INAM"
+  description="Conoce a las investigadoras e investigadores vinculados al INAM y consulta sus perfiles CTI Vitae."
+>
+  <PageHero
+    kicker="Comunidad científica"
+    title="Investigadoras e investigadores"
+    intro="Conoce a quienes impulsan la investigación del INAM. Filtra el directorio por ocupación o nivel RENACYT y visita sus perfiles CTI Vitae."
+    image="/amazonas-river-peru.webp"
+    imageAlt="Río amazónico entre la vegetación de Amazonas"
+  />
+
+  <main class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+    <section aria-label="Directorio de investigadores">
+      <div class="flex flex-col gap-6 border-b border-[var(--color-border)] pb-7 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Directorio</p>
+          <h2 class="mt-2 text-3xl font-semibold tracking-tight text-[var(--color-ink)]">Personas e ideas para un territorio sostenible</h2>
+          <p class="mt-3 text-sm leading-7 text-[var(--color-body)]">Perfiles con información pública disponible en CTI Vitae.</p>
+        </div>
+        <p class="shrink-0 text-sm text-[var(--color-muted)]" aria-live="polite"><span data-results-count>{investigators.length}</span> perfiles</p>
+      </div>
+
+      <div class="grid gap-4 border-b border-[var(--color-border)] py-6 sm:grid-cols-2">
+        <label class="grid gap-2 text-sm font-medium text-[var(--color-ink)]">
+          <span>Ocupación</span>
+          <select data-filter-occupation class="w-full rounded-xl border border-[var(--color-border)] bg-white px-4 py-3 text-sm text-[var(--color-body)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/20">
+            <option value="">Todas las ocupaciones</option>
+            {occupations.map((occupation) => <option value={occupation}>{occupation}</option>)}
+          </select>
+        </label>
+        <label class="grid gap-2 text-sm font-medium text-[var(--color-ink)]">
+          <span>Nivel RENACYT</span>
+          <select data-filter-level class="w-full rounded-xl border border-[var(--color-border)] bg-white px-4 py-3 text-sm text-[var(--color-body)] focus:border-[var(--color-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/20">
+            <option value="">Todos los niveles</option>
+            {levels.map((level) => <option value={level}>{level}</option>)}
+          </select>
+        </label>
+      </div>
+
+      <div class="divide-y divide-[var(--color-border)]" data-investigator-list>
+        {investigators.map((investigator) => (
+          <article
+            class="flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:gap-7"
+            data-investigator-card
+            data-occupation={investigator.occupation}
+            data-level={investigator.level}
+          >
+            <img
+              src={withBase(investigator.image)}
+              alt={`Retrato de ${investigator.name}`}
+              loading="lazy"
+              class="h-28 w-28 shrink-0 rounded-2xl object-cover object-center sm:h-32 sm:w-32"
+            />
+            <div class="min-w-0 flex-1">
+              <h3 class="text-xl font-semibold tracking-tight text-[var(--color-ink)]">{investigator.name}</h3>
+              <div class="mt-3 flex flex-wrap gap-2 text-sm">
+                <span class="rounded-full bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-body)]">{investigator.occupation}</span>
+                <span class="rounded-full bg-[var(--color-surface)] px-3 py-1.5 text-[var(--color-body)]">{investigator.level}</span>
+              </div>
+            </div>
+            <a
+              href={investigator.profile}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[var(--color-accent-deep)] transition-colors hover:text-[var(--color-accent)]"
+            >
+              Ver perfil CTI Vitae <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        ))}
+      </div>
+      <p data-empty-state hidden class="py-12 text-center text-sm text-[var(--color-body)]">No encontramos perfiles con esos filtros. Prueba otra combinación.</p>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  const occupationFilter = document.querySelector<HTMLSelectElement>('[data-filter-occupation]');
+  const levelFilter = document.querySelector<HTMLSelectElement>('[data-filter-level]');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-investigator-card]')];
+  const count = document.querySelector<HTMLElement>('[data-results-count]');
+  const emptyState = document.querySelector<HTMLElement>('[data-empty-state]');
+
+  function filterInvestigators() {
+    const occupation = occupationFilter?.value ?? '';
+    const level = levelFilter?.value ?? '';
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const matches = (!occupation || card.dataset.occupation === occupation)
+        && (!level || card.dataset.level === level);
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    });
+
+    if (count) count.textContent = String(visible);
+    if (emptyState) emptyState.hidden = visible > 0;
+  }
+
+  occupationFilter?.addEventListener('change', filterInvestigators);
+  levelFilter?.addEventListener('change', filterInvestigators);
+</script>
